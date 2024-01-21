@@ -19,8 +19,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>currencyExchange</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>currencyExchange</name>
-	<description>Demo project for Spring Boot</description>
+	<name>currency</name>
+	<description>Demo project for Currency</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
