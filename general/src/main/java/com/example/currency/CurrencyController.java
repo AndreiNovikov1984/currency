@@ -2,13 +2,22 @@ package com.example.currency;
 
 import com.example.currency.dto.ValCursDto;
 import com.example.currency.dto.ValCursDynamicDto;
-import lombok.NonNull;
+import com.example.currency.model.Request;
+import com.example.currency.model.RequestCurrency;
+import com.example.currency.model.RequestCurrencyDynamic;
+import com.example.currency.model.RequestCurrencyExchange;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -19,35 +28,35 @@ import org.springframework.web.bind.annotation.*;
 public class CurrencyController {
     private final CurrencyService currencyService;
 
-
+    @Operation(summary = "Запрос курсов всех валют на определенную дату", description = "если дата не задана - то на текущую")
     @GetMapping("/all")
-    public ResponseEntity<ValCursDto> getAllCurrencyInfo(@RequestParam(required = false) String date) {
-        log.info("Get info by All currency on date {}", date);
-        return new ResponseEntity<>(currencyService.getAllCurrencyInfo(date), HttpStatus.OK);
+    public ResponseEntity<ValCursDto> getAllCurrencyInfo(@Valid @RequestBody Request request) {
+        log.info("Get info by All currency on date {}", request.getDate());
+        return new ResponseEntity<>(currencyService.getAllCurrencyInfo(request.getDate()), HttpStatus.OK);
     }
 
-    @GetMapping("/{nameCurrency}")
-    public ResponseEntity<ValCursDto> getCurrencyInfo(@NonNull @PathVariable String nameCurrency,
-                                                      @RequestParam(required = false) String date) {
-        log.info("Get info by currency {} on date {}", nameCurrency, date);
-        return new ResponseEntity<>(currencyService.getCurrencyInfo(nameCurrency, date), HttpStatus.OK);
+    @Operation(summary = "Запрос курсов определенной валюты на определенную дату", description = "если дата не задана - то на текущую")
+    @GetMapping("/current")
+    public ResponseEntity<ValCursDto> getCurrencyInfo(@Valid @RequestBody RequestCurrency requestCurrency) {
+        log.info("Get info by currency {} on date {}", requestCurrency.getNameCurrency(), requestCurrency.getDate());
+        return new ResponseEntity<>(currencyService.getCurrencyInfo(requestCurrency.getNameCurrency(), requestCurrency.getDate()), HttpStatus.OK);
     }
 
+    @Operation(summary = "Запрос динамики курса определенной валюты за определенный период", description = "результат выдается списком")
     @GetMapping("/dynamic/{nameCurrency}")
-    public ResponseEntity<ValCursDynamicDto> getCurrencyDynamic(@NonNull @PathVariable String nameCurrency,
-                                                                @NonNull @RequestParam String dateFrom,
-                                                                @NonNull @RequestParam String dateTo) {
-        log.info("Get dynamic by currency {} from {} to {}", nameCurrency, dateFrom, dateTo);
-        return new ResponseEntity<>(currencyService.getCurrencyDynamic(nameCurrency, dateFrom, dateTo), HttpStatus.OK);
+    public ResponseEntity<ValCursDynamicDto> getCurrencyDynamic(@Valid @RequestBody RequestCurrencyDynamic dynamic) {
+        log.info("Get dynamic by currency {} from {} to {}", dynamic.getNameCurrency(), dynamic.getDateFrom(), dynamic.getDateTo());
+        return new ResponseEntity<>(currencyService.getCurrencyDynamic(dynamic.getNameCurrency(), dynamic.getDateFrom(),
+                dynamic.getDateTo()), HttpStatus.OK);
     }
 
+    @Operation(summary = "Запрос расчета обмена одной валюты на другую по курсу на определенную дату", description = "если дата не задана - то на текущую")
     @GetMapping("/{nameCurrencyFrom}/exchange/{nameCurrencyTo}")
-    public ResponseEntity<Double> getExchangeCurrency(@NonNull @PathVariable String nameCurrencyFrom,
-                                                      @NonNull @PathVariable String nameCurrencyTo,
-                                                      @NonNull @RequestParam Double value,
-                                                      @RequestParam(required = false) String date) {
-        log.info("Get exchange value = {} from currency {} to currency {} on date {}", value, nameCurrencyFrom, nameCurrencyTo, date);
-        return new ResponseEntity<>(currencyService.getExchangeCurrency(nameCurrencyFrom, nameCurrencyTo, value, date), HttpStatus.OK);
+    public ResponseEntity<Double> getExchangeCurrency(@Valid @RequestBody RequestCurrencyExchange exchange) {
+        log.info("Get exchange value = {} from currency {} to currency {} on date {}", exchange.getValue(),
+                exchange.getNameCurrencyFrom(), exchange.getNameCurrencyTo(), exchange.getDate());
+        return new ResponseEntity<>(currencyService.getExchangeCurrency(exchange.getNameCurrencyFrom(), exchange.getNameCurrencyTo(),
+                exchange.getValue(), exchange.getDate()), HttpStatus.OK);
     }
 
 }
