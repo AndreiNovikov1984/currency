@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.dictionaries;
 
 import lombok.Data;
 
@@ -9,23 +9,10 @@ import javax.xml.bind.annotation.XmlElement;
 
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Valute {
-
+public class ValuteShort {
     @XmlAttribute(name = "ID")
     private String id;
 
-    @XmlElement(name = "NumCode")
-    private short numCode;
-
     @XmlElement(name = "CharCode")
     private String charCode;
-
-    @XmlElement(name = "Name")
-    private String name;
-
-    @XmlElement(name = "Value")
-    private String value;
-
-    @XmlElement(name = "VunitRate")
-    private String vunitRate;
 }

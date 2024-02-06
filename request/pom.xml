@@ -22,23 +22,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-test</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-xml</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.fasterxml.jackson.dataformat</groupId>-->
+        <!--            <artifactId>jackson-dataformat-xml</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
@@ -52,10 +51,86 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>commons-lang</groupId>-->
+        <!--            <artifactId>commons-lang</artifactId>-->
+        <!--            <version>2.4</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.jvnet.jaxb2_commons</groupId>-->
+        <!--            <artifactId>jaxb2-basics-runtime</artifactId>-->
+        <!--            <version>0.5.0</version>-->
+        <!--        </dependency>-->
 
     </dependencies>
+    <build>
+        <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <proc>none</proc>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>jaxb2-maven-plugin</artifactId>-->
+            <!--                <version>2.5.0</version>-->
+            <!--                <configuration>-->
+            <!--                    <arguments>-->
+            <!--                        <argument>-XtoString</argument>-->
+            <!--                        <argument>-Xequals</argument>-->
+            <!--                        <argument>-XhashCode</argument>-->
+            <!--                    </arguments>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>xjc</id>-->
+            <!--                        <configuration>-->
+            <!--                            <xjbSources>-->
+            <!--                                <xjbSource>src/main/resources/xsd/global.xjb</xjbSource>-->
+            <!--                            </xjbSources>-->
+            <!--                            <sources>-->
+            <!--                                <source>src/main/resources/xsd/ValCurs.xsd</source>-->
+            <!--                                <source>src/main/resources/xsd/Valuta.xsd</source>-->
+            <!--                            </sources>-->
+            <!--&lt;!&ndash;                            <outputDirectory>${basedir}/src/main/java/com/example/external</outputDirectory>&ndash;&gt;-->
+            <!--&lt;!&ndash;                            <clearOutputDir>true</clearOutputDir>&ndash;&gt;-->
+            <!--                        </configuration>-->
+            <!--                        <goals>-->
+            <!--                            <goal>xjc</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <dependencies>-->
+            <!--                    <dependency>-->
+            <!--                        <groupId>org.jvnet.jaxb2_commons</groupId>-->
+            <!--                        <artifactId>jaxb2-basics</artifactId>-->
+            <!--                        <version>0.5.0</version>-->
+            <!--                    </dependency>-->
+            <!--                </dependencies>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>build-helper-maven-plugin</artifactId>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>add-source</id>-->
+            <!--                        <phase>generate-sources</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>add-source</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <sources>-->
+            <!--                                <source>src/main/generated</source>-->
+            <!--                            </sources>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+        </plugins>
+    </build>
+
+
 </project>

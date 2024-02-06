@@ -1,9 +1,9 @@
 package com.example.currency;
 
-import com.example.currency.dto.RecordDto;
-import com.example.currency.dto.ValCursDto;
-import com.example.currency.dto.ValCursDynamicDto;
-import com.example.currency.dto.ValuteDto;
+import com.example.currency.model.dto.RecordDto;
+import com.example.currency.model.dto.ValCursDto;
+import com.example.currency.model.dto.ValCursDynamicDto;
+import com.example.currency.model.dto.ValuteDto;
 import com.example.model.Record;
 import com.example.model.ValCurs;
 import com.example.model.ValCursDynamic;

@@ -1,18 +1,18 @@
 package com.example.currency.service;
 
 import com.example.currency.CurrencyMapper;
-import com.example.currency.dto.ValCursDto;
-import com.example.currency.dto.ValCursDynamicDto;
+import com.example.currency.model.dto.ValCursDto;
+import com.example.currency.model.dto.ValCursDynamicDto;
 import com.example.model.ValCurs;
 import com.example.model.Valute;
+import com.example.service.DictionaryService;
+import com.example.service.ReaderXML;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,18 +20,16 @@ import java.util.stream.Collectors;
 public class CurrencyServiceImpl implements CurrencyService {
     private final ReaderXML readerXML;
     private final CurrencyMapper currencyMapper;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DictionaryService dictionaryService;
 
     @Override
     public ValCursDto getAllCurrencyInfo(@Nullable LocalDate date) {
-        String requestDate = checkDate(date);
-        return currencyMapper.convertValCursToDto(readerXML.getAllCurrency(requestDate));
+        return currencyMapper.convertValCursToDto(readerXML.getAllCurrency(date));
     }
 
     @Override
     public ValCursDto getCurrencyInfo(String nameCurrency, @Nullable LocalDate date) {
-        String requestDate = checkDate(date);
-        ValCurs valCurs = readerXML.getAllCurrency(requestDate);
+        ValCurs valCurs = readerXML.getAllCurrency(date);
         List<Valute> currency = valCurs.getValute().stream()
                 .filter(p -> p.getCharCode().equalsIgnoreCase(nameCurrency))
                 .collect(Collectors.toList());
@@ -40,8 +38,10 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public ValCursDynamicDto getCurrencyDynamic(String nameCurrency, String dateFrom, String dateTo) {
-        return currencyMapper.convertValCursDynamicToDto(readerXML.getCurrencyDynamic(nameCurrency, dateFrom, dateTo));
+    public ValCursDynamicDto getCurrencyDynamic(String nameCurrency, LocalDate dateFrom, LocalDate dateTo) {
+        String currencyCode = dictionaryService.getDictionaryMap().get(nameCurrency).getId();
+        return currencyMapper.convertValCursDynamicToDto(readerXML.getCurrencyDynamic(currencyCode, dateFrom,
+                dateTo));
     }
 
     @Override
@@ -49,9 +49,5 @@ public class CurrencyServiceImpl implements CurrencyService {
         Double exchangeCurrnecyFrom =  getCurrencyInfo(nameCurrencyFrom, date).getValute().get(0).getValue();
         Double exchangeCurrnecyTo =  getCurrencyInfo(nameCurrencyTo, date).getValute().get(0).getValue();
         return  value * (exchangeCurrnecyFrom / exchangeCurrnecyTo);
-    }
-
-    private String checkDate(@Nullable LocalDate date) {
-        return Objects.requireNonNullElseGet(date, LocalDate::now).format(formatter);
     }
 }

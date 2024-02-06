@@ -1,7 +1,7 @@
 package com.example.currency;
 
-import com.example.currency.dto.ValCursDto;
-import com.example.currency.dto.ValCursDynamicDto;
+import com.example.currency.model.dto.ValCursDto;
+import com.example.currency.model.dto.ValCursDynamicDto;
 import com.example.currency.model.Request;
 import com.example.currency.model.RequestCurrency;
 import com.example.currency.model.RequestCurrencyDynamic;
@@ -41,7 +41,7 @@ public class CurrencyController {
     }
 
     @Operation(summary = "Запрос динамики курса определенной валюты за определенный период", description = "результат выдается списком")
-    @PostMapping("/dynamic/{nameCurrency}")
+    @PostMapping("/dynamic")
     public ResponseEntity<ValCursDynamicDto> getCurrencyDynamic(@Valid @RequestBody RequestCurrencyDynamic dynamic) {
         log.info("Get dynamic by currency {} from {} to {}", dynamic.getNameCurrency(), dynamic.getDateFrom(), dynamic.getDateTo());
         return new ResponseEntity<>(currencyService.getCurrencyDynamic(dynamic.getNameCurrency(), dynamic.getDateFrom(),
@@ -49,7 +49,7 @@ public class CurrencyController {
     }
 
     @Operation(summary = "Запрос расчета обмена одной валюты на другую по курсу на определенную дату", description = "если дата не задана - то на текущую")
-    @PostMapping("/{nameCurrencyFrom}/exchange/{nameCurrencyTo}")
+    @PostMapping("/exchange")
     public ResponseEntity<Double> getExchangeCurrency(@Valid @RequestBody RequestCurrencyExchange exchange) {
         log.info("Get exchange value = {} from currency {} to currency {} on date {}", exchange.getValue(),
                 exchange.getNameCurrencyFrom(), exchange.getNameCurrencyTo(), exchange.getDate());
