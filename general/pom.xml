@@ -17,17 +17,19 @@
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.16</org.projectlombok.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <request.version>0.0.1-SNAPSHOT</request.version>
     </properties>
 
     <dependencies>
-
+        <!-- Api -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>request</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${request.version}</version>
             <scope>compile</scope>
         </dependency>
-
+        <!-- End -->
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -42,24 +44,32 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.google.code.gson</groupId>-->
-<!--            <artifactId>gson</artifactId>-->
-<!--            <version>2.9.1</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.code.gson</groupId>-->
+        <!--            <artifactId>gson</artifactId>-->
+        <!--            <version>2.9.1</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+        <!-- End -->
 
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -80,18 +90,20 @@
             <version>${postgresql.version}</version>
         </dependency>
 
+        <!-- Test -->
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
-            <version>1.7.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <version>3.1.5</version>
         </dependency>
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.7.0</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
+        <!-- End -->
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

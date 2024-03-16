@@ -17,10 +17,10 @@ import java.time.LocalDate;
 public class RequestCurrencyDynamic extends RequestCurrency {
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Schema(description = "Дата начала показ динамики курса валюты", example = "01012002",  requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Дата начала показа динамики курса валюты", example = "01012002",  requiredMode = Schema.RequiredMode.REQUIRED)
     private final LocalDate dateFrom;
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Schema(description = "Дата завершения показ динамики курса валюты", example = "31012002",  requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Дата завершения показа динамики курса валюты", example = "31012002",  requiredMode = Schema.RequiredMode.REQUIRED)
     private final LocalDate dateTo;
 }

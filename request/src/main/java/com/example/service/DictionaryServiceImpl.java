@@ -37,7 +37,7 @@ public class DictionaryServiceImpl implements DictionaryService{
 
     private void updateDictionary(){
         ValCursShort valCursShort = readerXML.getAllCurrencyShort(null);
-        Valuta valuta = readerXML.getDictionary(Valuta.class);
+        Valuta valuta = readerXML.getDictionary();
         Map<String, Item> temporaryMap = new HashMap<>();
         for (Item item : valuta.getItems()){
             temporaryMap.put(item.getId(), item);

@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.configuration.RequestParameters;
 import com.example.dictionaries.ValCursShort;
+import com.example.dictionaries.Valuta;
 import com.example.model.ValCurs;
 import com.example.model.ValCursDynamic;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,6 @@ public class ReaderXMLImpl implements ReaderXML {
     private final RequestParameters parameters;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-
     @Override
     public ValCurs getAllCurrency(@Nullable LocalDate date) {
         return getValue(parameters.getBaseUrl() + parameters.getCurrencyUrl() + checkDate(date), ValCurs.class);
@@ -36,8 +36,8 @@ public class ReaderXMLImpl implements ReaderXML {
         return getValue(parameters.getBaseUrl() + parameters.getCurrencyUrl() + checkDate(date), ValCursShort.class);
     }
 
-    public <T> T getDictionary(Class<T> className) {
-        return getValue(parameters.getBaseUrl() + parameters.getDictionareUrl(), className);
+    public Valuta getDictionary() {
+        return getValue(parameters.getBaseUrl() + parameters.getDictionareUrl(), Valuta.class);
     }
 
     @Override
